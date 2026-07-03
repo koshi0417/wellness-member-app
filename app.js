@@ -421,6 +421,16 @@ function sendMessage() {
   const text = input.value.trim();
   if (!text || !currentChatId) return;
 
+  // NGワード（不適切な表現・卑猥な言葉など）のフィルター
+  const ngWords = ['馬鹿', 'アホ', '死ね', '殺す', 'エロ', 'ちんこ', 'まんこ', 'セックス', 'sex', 'カス']; 
+  const containsNG = ngWords.some(word => text.includes(word));
+  
+  if (containsNG) {
+    showToast('⚠️ 不適切な表現が含まれているため送信できません');
+    input.value = '';
+    return;
+  }
+
   const thread = CHAT_THREADS.find(t => t.id === currentChatId);
   if (!thread) return;
 
@@ -431,21 +441,30 @@ function sendMessage() {
   input.value = '';
   renderMessages(thread);
 
-  // Simulate auto-reply after 2 seconds
+  // Simulate smart auto-reply after 1.5 seconds
   setTimeout(() => {
-    const replies = [
-      'かしこまりました。確認いたしますね。',
-      'ご連絡ありがとうございます。次回お会いした際に詳しくお話ししましょう。',
-      '承知しました。何かあればいつでもメッセージくださいね😊',
-      'わかりました。スタッフ間でも共有しておきますね。'
-    ];
+    let reply = '承知いたしました。確認のうえ、スタッフより改めてご連絡させていただきます😊';
+
+    // キーワード判定によるスマートリプライ
+    if (text.includes('予約') || text.includes('キャンセル') || text.includes('変更')) {
+      reply = '予約に関するご連絡ありがとうございます。スケジュールの確認をしてお返事いたしますね。お急ぎの場合はフロントまでお電話くださいませ。';
+    } else if (text.includes('痛') || text.includes('違和感') || text.includes('きつい') || text.includes('辛い')) {
+      reply = 'お体の具合が心配ですね…。決して無理はなさらないでください。次回の運動時は少し負荷を下げて様子を見ましょう。痛みが続くようでしたらスタッフにご相談くださいね。';
+    } else if (text.includes('ありがとう') || text.includes('お世話')) {
+      reply = 'こちらこそ、いつもありがとうございます！引き続き、ご自身のペースで無理なく楽しく続けていきましょう💪';
+    } else if (text.includes('休') || text.includes('遅れ') || text.includes('欠席')) {
+      reply = 'ご連絡ありがとうございます、承知いたしました。お気をつけてお過ごしください。また次回元気なお顔を拝見できるのをお待ちしております！';
+    } else if (text.includes('こんにちは') || text.includes('おはよう') || text.includes('こんばんは')) {
+      reply = 'こんにちは！本日のご体調はいかがですか？マイページの「体調記録」から日々の状態を入力していただけると、私たちもサポートしやすくなります！';
+    }
+
     thread.messages.push({
       sender: 'them',
-      text: replies[Math.floor(Math.random() * replies.length)],
+      text: reply,
       time: timeStr
     });
     if (currentChatId === thread.id) renderMessages(thread);
-  }, 2000);
+  }, 1500);
 }
 
 // ===== Notifications =====
