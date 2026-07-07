@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VitalConnect - デバイス選択</title>
+  <meta name="description" content="VitalConnect 会員様専用マイページ - ご利用デバイスを選択してください">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="portal.css">
+</head>
+<body>
+
+  <div class="portal">
+    <div class="portal-bg"></div>
+
+    <div class="portal-content">
+      <!-- Logo -->
+      <div class="portal-logo">
+        <div class="portal-logo-icon">💚</div>
+        <h1 class="portal-title">VitalConnect</h1>
+        <p class="portal-subtitle">会員様専用マイページ</p>
+      </div>
+
+      <!-- Device Selection -->
+      <p class="portal-prompt">ご利用のデバイスを選択してください</p>
+
+      <div class="device-cards">
+        <!-- Smartphone -->
+        <a href="index.html" class="device-card" id="card-mobile">
+          <div class="device-preview mobile-preview">
+            <div class="phone-frame">
+              <div class="phone-notch"></div>
+              <div class="phone-screen">
+                <div class="mini-header"></div>
+                <div class="mini-card"></div>
+                <div class="mini-card short"></div>
+                <div class="mini-nav">
+                  <span></span><span></span><span></span><span></span><span></span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="device-info">
+            <div class="device-icon">📱</div>
+            <h2 class="device-name">スマートフォン</h2>
+            <p class="device-desc">タッチ操作に最適化された<br>モバイルレイアウト</p>
+          </div>
+        </a>
+
+        <!-- PC / Tablet -->
+        <a href="desktop.html" class="device-card" id="card-desktop">
+          <div class="device-preview desktop-preview">
+            <div class="desktop-frame">
+              <div class="desktop-screen">
+                <div class="mini-sidebar">
+                  <div class="mini-sb-item active"></div>
+                  <div class="mini-sb-item"></div>
+                  <div class="mini-sb-item"></div>
+                  <div class="mini-sb-item"></div>
+                  <div class="mini-sb-item"></div>
+                </div>
+                <div class="mini-main">
+                  <div class="mini-topbar"></div>
+                  <div class="mini-grid">
+                    <div class="mini-g-card"></div>
+                    <div class="mini-g-card"></div>
+                    <div class="mini-g-card"></div>
+                    <div class="mini-g-card"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="desktop-stand"></div>
+            </div>
+          </div>
+          <div class="device-info">
+            <div class="device-icon">💻</div>
+            <h2 class="device-name">PC・タブレット</h2>
+            <p class="device-desc">ワイド画面に最適化された<br>デスクトップレイアウト</p>
+          </div>
+        </a>
+      </div>
+
+      <div class="portal-footer">
+        <p>© 2028 VitalConnect. All rights reserved.</p>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

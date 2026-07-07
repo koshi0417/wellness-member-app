@@ -1,0 +1,361 @@
+/* ============================================
+   VitalConnect Portal
+   Device Selection Screen
+   ============================================ */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 16px; -webkit-font-smoothing: antialiased; }
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Hiragino Sans', sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+a { text-decoration: none; color: inherit; }
+
+.portal {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.portal-bg {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(160deg, #e6f5f0 0%, #f5f0eb 30%, #fef3eb 60%, #eef0ff 100%);
+  z-index: 0;
+}
+
+.portal-bg::before {
+  content: '';
+  position: absolute;
+  top: -20%; right: -5%;
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(26, 154, 122, 0.07) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: float1 8s ease-in-out infinite;
+}
+
+.portal-bg::after {
+  content: '';
+  position: absolute;
+  bottom: -15%; left: -5%;
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.06) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: float2 10s ease-in-out infinite;
+}
+
+@keyframes float1 {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(-30px, 20px); }
+}
+
+@keyframes float2 {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(20px, -30px); }
+}
+
+.portal-content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 40px 24px;
+  max-width: 900px;
+  width: 100%;
+  animation: fadeInUp 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes fadeInUp {
+  from { transform: translateY(30px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+/* Logo */
+.portal-logo {
+  margin-bottom: 40px;
+}
+
+.portal-logo-icon {
+  width: 80px; height: 80px;
+  background: linear-gradient(135deg, #1a9a7a, #40c9a2);
+  border-radius: 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 40px;
+  margin-bottom: 16px;
+  box-shadow: 0 8px 28px rgba(26, 154, 122, 0.25);
+  animation: logoPulse 3s ease-in-out infinite;
+}
+
+@keyframes logoPulse {
+  0%, 100% { box-shadow: 0 8px 28px rgba(26, 154, 122, 0.25); }
+  50% { box-shadow: 0 8px 36px rgba(26, 154, 122, 0.4); }
+}
+
+.portal-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #1a9a7a;
+  letter-spacing: -0.03em;
+  margin-bottom: 4px;
+}
+
+.portal-subtitle {
+  font-size: 1rem;
+  color: #6b7280;
+}
+
+.portal-prompt {
+  font-size: 1.1rem;
+  color: #2d3142;
+  font-weight: 500;
+  margin-bottom: 32px;
+}
+
+/* Device Cards */
+.device-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+  max-width: 720px;
+  margin: 0 auto 48px;
+}
+
+.device-card {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(20px);
+  border: 2px solid rgba(230, 227, 220, 0.6);
+  border-radius: 24px;
+  padding: 32px 24px 28px;
+  cursor: pointer;
+  transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+.device-card:hover {
+  transform: translateY(-6px) scale(1.02);
+  border-color: #1a9a7a;
+  box-shadow: 0 12px 40px rgba(26, 154, 122, 0.18);
+  background: rgba(255, 255, 255, 0.95);
+}
+
+.device-card:active {
+  transform: translateY(-2px) scale(1.01);
+}
+
+/* Device Previews */
+.device-preview {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+/* Phone Frame */
+.phone-frame {
+  width: 90px;
+  height: 160px;
+  background: #2d3142;
+  border-radius: 16px;
+  padding: 8px 5px;
+  position: relative;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+}
+
+.phone-notch {
+  width: 30px;
+  height: 5px;
+  background: #1a1a2e;
+  border-radius: 3px;
+  margin: 0 auto 6px;
+}
+
+.phone-screen {
+  width: 100%;
+  height: calc(100% - 11px);
+  background: #f5f0eb;
+  border-radius: 8px;
+  padding: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  overflow: hidden;
+  position: relative;
+}
+
+.mini-header {
+  height: 10px;
+  background: linear-gradient(90deg, #1a9a7a, #40c9a2);
+  border-radius: 3px;
+  flex-shrink: 0;
+}
+
+.mini-card {
+  height: 28px;
+  background: white;
+  border-radius: 4px;
+  border: 1px solid #e8e3dc;
+  flex-shrink: 0;
+}
+
+.mini-card.short { height: 18px; }
+
+.mini-nav {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 14px;
+  background: white;
+  border-top: 1px solid #e8e3dc;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 0 4px;
+  border-radius: 0 0 8px 8px;
+}
+
+.mini-nav span {
+  width: 6px; height: 6px;
+  background: #d1d5db;
+  border-radius: 2px;
+}
+
+.mini-nav span:first-child { background: #1a9a7a; }
+
+/* Desktop Frame */
+.desktop-frame {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.desktop-screen {
+  width: 180px;
+  height: 120px;
+  background: #2d3142;
+  border-radius: 8px 8px 0 0;
+  padding: 6px;
+  display: flex;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+}
+
+.desktop-screen > * {
+  background: #f5f0eb;
+}
+
+.mini-sidebar {
+  width: 36px;
+  border-radius: 4px 0 0 4px;
+  padding: 6px 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  background: white;
+  border-right: 1px solid #e8e3dc;
+}
+
+.mini-sb-item {
+  height: 6px;
+  background: #d1d5db;
+  border-radius: 2px;
+}
+
+.mini-sb-item.active { background: #1a9a7a; }
+
+.mini-main {
+  flex: 1;
+  border-radius: 0 4px 4px 0;
+  padding: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.mini-topbar {
+  height: 8px;
+  background: linear-gradient(90deg, #1a9a7a, #40c9a2);
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.mini-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px;
+  flex: 1;
+}
+
+.mini-g-card {
+  background: white;
+  border-radius: 3px;
+  border: 1px solid #e8e3dc;
+}
+
+.desktop-stand {
+  width: 60px;
+  height: 8px;
+  background: #c0bdb8;
+  border-radius: 0 0 4px 4px;
+  margin-top: -1px;
+}
+
+.desktop-stand::after {
+  content: '';
+  display: block;
+  width: 90px;
+  height: 4px;
+  background: #d4d0cb;
+  border-radius: 2px;
+  margin: 0 auto;
+  position: relative;
+  top: 8px;
+  left: -15px;
+}
+
+/* Device Info */
+.device-info {
+  text-align: center;
+}
+
+.device-icon {
+  font-size: 32px;
+  margin-bottom: 8px;
+}
+
+.device-name {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #2d3142;
+  margin-bottom: 6px;
+}
+
+.device-desc {
+  font-size: 0.85rem;
+  color: #6b7280;
+  line-height: 1.5;
+}
+
+/* Footer */
+.portal-footer {
+  text-align: center;
+}
+
+.portal-footer p {
+  font-size: 0.75rem;
+  color: #9ca3af;
+}
+
+/* Responsive */
+@media (max-width: 560px) {
+  .device-cards {
+    grid-template-columns: 1fr;
+    max-width: 320px;
+  }
+
+  .desktop-screen { width: 160px; height: 100px; }
+  .portal-title { font-size: 1.6rem; }
+}
