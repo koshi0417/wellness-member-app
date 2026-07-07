@@ -23,38 +23,63 @@
         <p class="portal-subtitle">会員様専用マイページ</p>
       </div>
 
-      <!-- Device Selection -->
-      <p class="portal-prompt">ご利用のデバイスを選択してください</p>
+      <!-- Tab Selector -->
+      <div class="tab-selector">
+        <div class="tab-label">画面モードを選択してください</div>
+        <div class="tab-bar">
+          <button class="tab-btn active" id="tab-mobile" data-target="mobile">
+            <span class="tab-icon">📱</span>
+            <span class="tab-text">スマートフォン</span>
+          </button>
+          <button class="tab-btn" id="tab-desktop" data-target="desktop">
+            <span class="tab-icon">💻</span>
+            <span class="tab-text">PC・タブレット</span>
+          </button>
+          <div class="tab-indicator" id="tab-indicator"></div>
+        </div>
+      </div>
 
-      <div class="device-cards">
-        <!-- Smartphone -->
-        <a href="index.html" class="device-card" id="card-mobile">
-          <div class="device-preview mobile-preview">
+      <!-- Preview Panels -->
+      <div class="preview-area">
+
+        <!-- Mobile Preview -->
+        <div class="preview-panel active" id="panel-mobile">
+          <div class="preview-device">
             <div class="phone-frame">
               <div class="phone-notch"></div>
               <div class="phone-screen">
                 <div class="mini-header"></div>
+                <div class="mini-vitals">
+                  <div class="mini-vital-card"></div>
+                  <div class="mini-vital-card"></div>
+                </div>
                 <div class="mini-card"></div>
                 <div class="mini-card short"></div>
                 <div class="mini-nav">
-                  <span></span><span></span><span></span><span></span><span></span>
+                  <span class="active"></span><span></span><span></span><span></span><span></span>
                 </div>
               </div>
             </div>
           </div>
-          <div class="device-info">
-            <div class="device-icon">📱</div>
-            <h2 class="device-name">スマートフォン</h2>
-            <p class="device-desc">タッチ操作に最適化された<br>モバイルレイアウト</p>
+          <div class="preview-info">
+            <h2>スマートフォン向けレイアウト</h2>
+            <ul class="feature-list">
+              <li>✅ タッチ操作に最適化</li>
+              <li>✅ 下部ナビゲーションバー</li>
+              <li>✅ 大きなボタン・文字サイズ</li>
+              <li>✅ 縦スクロール中心の操作</li>
+            </ul>
+            <a href="index.html" class="preview-btn">📱 スマートフォン版を開く</a>
           </div>
-        </a>
+        </div>
 
-        <!-- PC / Tablet -->
-        <a href="desktop.html" class="device-card" id="card-desktop">
-          <div class="device-preview desktop-preview">
+        <!-- Desktop Preview -->
+        <div class="preview-panel" id="panel-desktop">
+          <div class="preview-device">
             <div class="desktop-frame">
               <div class="desktop-screen">
                 <div class="mini-sidebar">
+                  <div class="mini-sb-logo"></div>
                   <div class="mini-sb-item active"></div>
                   <div class="mini-sb-item"></div>
                   <div class="mini-sb-item"></div>
@@ -69,17 +94,28 @@
                     <div class="mini-g-card"></div>
                     <div class="mini-g-card"></div>
                   </div>
+                  <div class="mini-two-col">
+                    <div class="mini-g-card tall"></div>
+                    <div class="mini-g-card tall"></div>
+                  </div>
                 </div>
               </div>
               <div class="desktop-stand"></div>
+              <div class="desktop-base"></div>
             </div>
           </div>
-          <div class="device-info">
-            <div class="device-icon">💻</div>
-            <h2 class="device-name">PC・タブレット</h2>
-            <p class="device-desc">ワイド画面に最適化された<br>デスクトップレイアウト</p>
+          <div class="preview-info">
+            <h2>PC・タブレット向けレイアウト</h2>
+            <ul class="feature-list">
+              <li>✅ サイドバーナビゲーション</li>
+              <li>✅ 2カラムの広々レイアウト</li>
+              <li>✅ チャット分割ペイン表示</li>
+              <li>✅ ワイド画面を有効活用</li>
+            </ul>
+            <a href="desktop.html" class="preview-btn desktop">💻 PC・タブレット版を開く</a>
           </div>
-        </a>
+        </div>
+
       </div>
 
       <div class="portal-footer">
@@ -87,6 +123,38 @@
       </div>
     </div>
   </div>
+
+  <script>
+    // Tab switching
+    const tabs = document.querySelectorAll('.tab-btn');
+    const panels = document.querySelectorAll('.preview-panel');
+    const indicator = document.getElementById('tab-indicator');
+
+    function switchTab(target) {
+      tabs.forEach(t => t.classList.remove('active'));
+      panels.forEach(p => p.classList.remove('active'));
+      document.querySelector(`.tab-btn[data-target="${target}"]`).classList.add('active');
+      document.getElementById(`panel-${target}`).classList.add('active');
+
+      // Move indicator
+      const activeTab = document.querySelector('.tab-btn.active');
+      indicator.style.left = activeTab.offsetLeft + 'px';
+      indicator.style.width = activeTab.offsetWidth + 'px';
+    }
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => switchTab(tab.dataset.target));
+    });
+
+    // Init indicator position
+    window.addEventListener('load', () => {
+      const activeTab = document.querySelector('.tab-btn.active');
+      if (activeTab) {
+        indicator.style.left = activeTab.offsetLeft + 'px';
+        indicator.style.width = activeTab.offsetWidth + 'px';
+      }
+    });
+  </script>
 
 </body>
 </html>
